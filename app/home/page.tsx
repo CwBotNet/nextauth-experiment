@@ -1,16 +1,22 @@
-import { getServerSession } from "next-auth"
+import ServerSession from "@/components/ServerSession";
+import Session from "@/components/Session";
+import Logout from "@/components/ui/LogoutBtn";
 
-async function getUser() {
-  const session = await getServerSession();
-  return session;
-}
+export default async function User() {
 
-export default async function Home() {
-  const session = await getUser();
 
   return (
-    <div>
-      {JSON.stringify(session)}
+    <div className="flex flex-col justify-center items-center h-screen">
+      <div className="flex gap-x-2">
+        Client session: <Session />
+      </div>
+      <div className="flex gap-x-2">
+        Server Session:
+        <ServerSession />
+      </div>
+
+      <Logout />
+
     </div>
-  );
+  )
 }

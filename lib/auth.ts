@@ -11,6 +11,9 @@ export const NEXT_AUTH_CONFIG = {
       async authorize(credentials: any) {
         return {
           id: "user1",
+          name: "asd",
+          userId: "asd",
+          email: "ramdomEmail",
         };
       },
     }),
@@ -18,6 +21,7 @@ export const NEXT_AUTH_CONFIG = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     jwt: async ({ user, token }: any) => {
+      console.log(token);
       if (user) {
         token.id = user.id;
       }
@@ -25,7 +29,7 @@ export const NEXT_AUTH_CONFIG = {
     },
     session: ({ session, token, user }: any) => {
       if (session.user) {
-        session.user.id = token.uid;
+        session.user.id = token.id;
       }
       return session;
     },
